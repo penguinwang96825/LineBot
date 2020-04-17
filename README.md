@@ -24,7 +24,7 @@ Develop a LineBot to do something for me.
 12. Copy paste **Channel access token** and **Channel secret** into `app.py`.
 
 ### Upload app to Heroku
-1. Download and install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+1. Download and install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli). If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
 2. Open terminal: 
 ```shell
 heroku login
@@ -35,11 +35,11 @@ git config --global user.name "Your name"
 git config --global user.email [Your email]
 git init
 ```
-4. Connect to Heroku
+4. Connect to Heroku. Use Git to clone line-bot-wang's source code to your local machine.
 ```shell
 heroku git:remote -a {HEROKU_APP_NAME}
 ```
-5. Push your code onto Heroku. (**Every time you update your code, please run these three lines of code.**)
+5. Push your code onto Heroku. (**Every time you update your code, please run these three lines of code.**) Make some changes to the code you just cloned and deploy them to Heroku using Git.
 ```shell
 git add .
 git commit -m "Add code"
