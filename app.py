@@ -22,7 +22,7 @@ line_bot_api = LineBotApi(channel_access)
 # Channel Secret
 handler = WebhookHandler(secret)
 
-# 監聽所有來自 /callback 的 Post Request
+# Monitor all post requests from /callback
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -37,6 +37,8 @@ def callback():
         abort(400)
     return 'OK'
 
+# ================= Customised Function Start =================
+
 def get_pnd_ranking():
     url = "https://pad.skyozora.com/pets/statistics/"
     r = requests.get(url, timeout=20).text
@@ -49,7 +51,7 @@ def get_pnd_ranking():
         tds = trs.find_all(name="td")
 
         pet_name = tds[1].find(name="a").get("title")
-        pet_name = pet_name.split("- ")[1]
+        # pet_name = pet_name.split("- ")[1]
 
         link = tds[1].find(name="a").get("href")
         link = "https://pad.skyozora.com/" + link
@@ -57,10 +59,10 @@ def get_pnd_ranking():
         review = tds[2].find_all(text=True)
         review = "".join(review)
 
-        data = 'TOP{}\t{}\n'.format(i+1, pet_name)
+        data = 'TOP{:2d}\t{} ({})\n'.format(i+1, pet_name, review)
         content += data
 
-    content = "龍族拼圖玩家評分中整體評分最高的寵物\n\n" + content
+    content = "TOP Ranking of Reviews from P&D Players\n\n" + content
     return content
 
 def get_movie():
@@ -72,32 +74,33 @@ def get_movie():
     div = soup.find_all(name="li", attrs={"class": "filmTitle"})
     for i in range(len(div)):
         movie_name = div[i].find(name="a").string
-        data = "{}\t{}\n".format(i+1, movie_name)
+        data = "{:>2d}. {}\n".format(i+1, movie_name)
         content += data
         
-    content = "台中大遠百威秀影城\n\n" + content
+    content = "VIESHOW CINEMA\n\n" + content
     return content
 
 def get_currency():
-    url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+    url = "https://rate.bot.com.tw/xrt?Lang=en-US"
     r = requests.get(url, timeout=20).text
     soup = BeautifulSoup(r, "html.parser")
     
     update_time = soup.find(name="span", attrs={"class": "time"}).string
     table = soup.find(name="table", attrs={"class": "table table-striped table-bordered table-condensed table-hover"})
     td1 = table.find_all(name="td", attrs={"class": "currency phone-small-font"})
-    td2 = table.find_all(name="td", attrs={"data-table": "本行現金賣出"})
+    td2 = table.find_all(name="td", attrs={"data-table": "Cash Selling"})
     
     content = ""
     for i in range(len(td1)):
         cur = td1[i].find(name="div", attrs={"class": "visible-phone print_hide"}).string
-        cur = cur.replace(" ", "").replace("\n", "")
+        cur = cur.lstrip().rstrip()
+        cur = cur.replace("\n", "")
         price = td2[2*i].string
 
-        data = "{}\t{}\n".format(str(cur), str(price))
+        data = "{:>24s}\t{}\n".format(str(cur), str(price))
         content += data
         
-    content = "牌價最新掛牌時間：{}\n\n".format(update_time) + content
+    content = "Quoted Date: {}\n\n".format(update_time) + content
         
     return content
 
@@ -121,7 +124,9 @@ def get_github():
         
     return content
 
-# 處理訊息
+# ================= Customised Function End =================
+
+# Handle message from user
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
@@ -156,3 +161,4 @@ import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    
