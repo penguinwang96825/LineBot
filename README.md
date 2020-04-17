@@ -66,7 +66,8 @@ heroku logs --tail --app {HEROKU_APP_NAME}
 
 ## Line Messaging API Documentation
 You can send the following types of messages. By defining actions, you can make these messages interactive.
-Text message
+Here is the official API [documentation](https://developers.line.biz/en/docs/messaging-api/message-types/#text-messages).
+- Text message
 - Sticker message
 - Image message
 - Video message
