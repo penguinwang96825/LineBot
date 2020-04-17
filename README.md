@@ -76,15 +76,13 @@ Text message
 - Template message
 - Flex Message
 
-### TextSendMessage （文字訊息）
-![](https://i.imgur.com/LieCFAb.png =250x)
+### TextSendMessage （Text Message）
 ```python
 message = TextSendMessage(text='Hello, world')
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### ImageSendMessage（圖片訊息）
-![](https://i.imgur.com/RaH7gqo.png =250x)
+### ImageSendMessage（Image Message）
 ```python
 message = ImageSendMessage(
     original_content_url='https://example.com/original.jpg',
@@ -93,8 +91,7 @@ message = ImageSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### VideoSendMessage（影片訊息）
-![](https://i.imgur.com/o6cvf3o.png =250x)
+### VideoSendMessage（Video Message）
 ```python
 message = VideoSendMessage(
     original_content_url='https://example.com/original.mp4',
@@ -103,8 +100,7 @@ message = VideoSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### AudioSendMessage（音訊訊息）
-![](https://i.imgur.com/w5szZag.png =250x)
+### AudioSendMessage（Audio Message）
 ```python
 message = AudioSendMessage(
     original_content_url='https://example.com/original.m4a',
@@ -113,8 +109,7 @@ message = AudioSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### LocationSendMessage（位置訊息）
-![](https://i.imgur.com/tXE7Aus.png =250x)
+### LocationSendMessage（Location Message）
 ```python
 message = LocationSendMessage(
     title='my location',
@@ -125,8 +120,7 @@ message = LocationSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### StickerSendMessage（貼圖訊息）
-![](https://i.imgur.com/7x0mgK1.png =250x)
+### StickerSendMessage（Sticker Message）
 ```python
 message = StickerSendMessage(
     package_id='1',
@@ -135,8 +129,7 @@ message = StickerSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### ImagemapSendMessage （組圖訊息）
-![](https://i.imgur.com/MoSf2D6.png =250x)
+### ImagemapSendMessage （Imagemap Message）
 ```python
 message = ImagemapSendMessage(
     base_url='https://example.com/base',
@@ -160,8 +153,7 @@ message = ImagemapSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### TemplateSendMessage - ButtonsTemplate （按鈕介面訊息）
-![](https://i.imgur.com/41lXWjP.png =250x)
+### TemplateSendMessage - ButtonsTemplate （Buttons Interface Message）
 ```python
 message = TemplateSendMessage(
     alt_text='Buttons template',
@@ -189,8 +181,7 @@ message = TemplateSendMessage(
 line_bot_api.reply_message(event.reply_token, message)
 ```
 
-### TemplateSendMessage - ConfirmTemplate（確認介面訊息）
-![](https://i.imgur.com/U8NDhrt.png =250x)
+### TemplateSendMessage - ConfirmTemplate（Confirm Interface Message）
 ```python
 message = TemplateSendMessage(
     alt_text='Confirm template',
